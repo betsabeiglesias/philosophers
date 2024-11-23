@@ -1,7 +1,7 @@
 NAME = philo
 
 SRCS = main.c \
-		parse.c \
+		checkings.c \
 		auxiliar.c \
 
 OBJ_DIR = ./obj
@@ -10,13 +10,14 @@ CC = cc
 NO_LINK = -c
 CFLAGS = -Wall -Werror -Wextra
 INC = -I./philosophers.h
+LDFLAGS = -lpthread
 
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 
 all: $(OBJ_DIR) $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
 	$(CC) $(NO_LINK) $(CFLAGS) -I$(INC) $< -o $@

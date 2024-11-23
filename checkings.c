@@ -6,7 +6,7 @@
 /*   By: beiglesi <beiglesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:01:50 by beiglesi          #+#    #+#             */
-/*   Updated: 2024/11/22 13:02:39 by beiglesi         ###   ########.fr       */
+/*   Updated: 2024/11/23 12:11:12 by beiglesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	check_arguments(int argc, char **argv)
 	if(argc != 5 && argc != 6)
 		return(handle_error(ERR_ARGS), EXIT_FAILURE);
 	if(ft_isdigit_philo(argv))
+		return(handle_error(ERR_ARGS), EXIT_FAILURE);
+	if(negative_args(argv))
 		return(handle_error(ERR_ARGS), EXIT_FAILURE);
 	return(EXIT_SUCCESS);
 }
@@ -33,12 +35,19 @@ int	ft_isdigit_philo(char **str)
 	int	i;
 	int	j;
 
-	i = 0;
-	j = 0;
-	while(str[i][j] != '\0')
+	i = 1;
+
+	printf("AAAA\n");
+	while(str[i])
 	{
+		j = 0;
+		while(is_space(str[i][j]))
+			j++;
+		if(str[i][j] == '-' || str[i][j] == '+')
+			j++;
+		while(str[i][j])
 		{
-			if(str[i][j] >= '0' && str[i][j] <= '9' || str[i][j] == '-' || str[i][j] == '+')
+			if (str[i][j] < '0' || str[i][j] > '9')
 				return(1);
 			j++;
 		}
@@ -67,5 +76,25 @@ int ft_atoi_philo(char *str)
 		nb = nb * 10 + (str[i] - '0');
 		i++;
 	}
+	// if (sign == -1)
+	// 	return(handle_error(ERR_ARGS), EXIT_FAILURE);
 	return(nb * sign);	
+}
+
+int	check_int (int argc, char **argv)
+{
+	int			i;
+	long int	nb;
+
+	i = 1;
+	while(i < argc - 1)
+	{
+		nb = ft_atoi_philo(argv[i]);
+		if (nb < 0)
+			return(handle_error(ERR_NEG), EXIT_FAILURE);
+		if (nb > INT_MAX)
+			return(handle_error(ERR_MAX), EXIT_FAILURE);
+		i++;
+	}
+	return(EXIT_SUCCESS);
 }
