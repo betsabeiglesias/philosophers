@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checkings.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beiglesi <beiglesi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:01:50 by beiglesi          #+#    #+#             */
-/*   Updated: 2024/11/23 12:11:12 by beiglesi         ###   ########.fr       */
+/*   Updated: 2024/12/20 15:33:20 by binary           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	check_arguments(int argc, char **argv)
 		return(handle_error(ERR_ARGS), EXIT_FAILURE);
 	if(ft_isdigit_philo(argv))
 		return(handle_error(ERR_ARGS), EXIT_FAILURE);
-	if(negative_args(argv))
+	if(check_int(argc, argv))
 		return(handle_error(ERR_ARGS), EXIT_FAILURE);
 	return(EXIT_SUCCESS);
 }
@@ -36,8 +36,6 @@ int	ft_isdigit_philo(char **str)
 	int	j;
 
 	i = 1;
-
-	printf("AAAA\n");
 	while(str[i])
 	{
 		j = 0;
@@ -76,8 +74,6 @@ int ft_atoi_philo(char *str)
 		nb = nb * 10 + (str[i] - '0');
 		i++;
 	}
-	// if (sign == -1)
-	// 	return(handle_error(ERR_ARGS), EXIT_FAILURE);
 	return(nb * sign);	
 }
 

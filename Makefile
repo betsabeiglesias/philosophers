@@ -3,6 +3,7 @@ NAME = philo
 SRCS = main.c \
 		checkings.c \
 		auxiliar.c \
+		aux.c
 
 OBJ_DIR = ./obj
 
