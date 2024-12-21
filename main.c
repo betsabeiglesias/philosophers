@@ -6,7 +6,7 @@
 /*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:21:07 by beiglesi          #+#    #+#             */
-/*   Updated: 2024/12/20 23:03:03 by binary           ###   ########.fr       */
+/*   Updated: 2024/12/21 20:16:40 by binary           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int get_args(int argc, char **argv, t_data *info)
 	else
 		(void) info->must_meals;
 	info->time_start = get_time();
+	info->philo_dead = false;
 	info->phil = malloc(sizeof(t_philo) * info->nb_philo);
 	if (!info->phil)
 		return(handle_error(ERR_MALL), EXIT_FAILURE);
@@ -65,6 +66,7 @@ void	init_philo(t_data *info)
 		info->phil[i].meals_eaten = 0;
 		info->phil[i].alive = true;
 		info->phil[i].last_meal = 0;
+		info->phil[i].state = BIRTH;
 		info->phil[i].info = info;
 		info->phil[i].r_fork = &info->forks[i];
 		if (info->nb_philo > 1)
@@ -82,7 +84,7 @@ int	init_threads(t_philo *phil, t_data *info)
 	i = 0;
 	while (i < info->nb_philo)
 	{
-		if (pthread_create(&info->phil[i].philo, NULL, test, &info->phil[i]))
+		if (pthread_create(&info->phil[i].philo, NULL, routine, &info->phil[i]))
 			{
 				handle_error(ERR_THR);
 				return (EXIT_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:22:55 by beiglesi          #+#    #+#             */
-/*   Updated: 2024/12/20 22:01:38 by binary           ###   ########.fr       */
+/*   Updated: 2024/12/21 23:45:12 by binary           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,13 @@ typedef struct s_data
 	int				to_sleep;
 	int				must_meals;
 	long int		time_start;
+	bool			philo_dead;
 	t_philo			*phil;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	m_dead;
+	pthread_mutex_t	m_meals;
+	pthread_mutex_t	m_print;
+
 
 
 }			t_data;	
@@ -66,12 +70,22 @@ typedef struct s_philo
 	int				meals_eaten;
 	bool			alive;
 	long int		last_meal;
+	t_state			state;
 	pthread_t		philo;
 	pthread_mutex_t *r_fork;
 	pthread_mutex_t *l_fork;
 	t_data			*info;
 }				t_philo;
 
+typedef enum e_state
+{
+	FORK,
+	EAT,
+	SLEEP,
+	THINK,
+	DEAD,
+	BIRTH
+}			t_state;
 
 
 
@@ -80,10 +94,19 @@ int			get_args(int argc, char **argv, t_data *info);
 int			init_philo(t_data *info);
 int			init_mutex(t_data *info);
 int			init_threads(t_philo *phil, t_data *info);
-void 		*test(void *arg);
+
+/* DINNER */
+void	routine(void *arg);
+void	dinner_start (t_philo *phil);
+void	philo_life(t_philo *phil);
+void    print_action(t_philo *phil, int action);
+
+
 
 /* AUXILIAR */
 void		handle_error(int error_type);
+void ft_putstr(char *str, int fd);
+int ft_strlen(char *str);
 
 long int	get_time(void);
 
