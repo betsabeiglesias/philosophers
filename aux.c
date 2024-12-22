@@ -6,7 +6,7 @@
 /*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:13:31 by binary            #+#    #+#             */
-/*   Updated: 2024/12/22 00:41:23 by binary           ###   ########.fr       */
+/*   Updated: 2024/12/22 22:44:27 by binary           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,35 +26,24 @@ long int    get_time(void)
     return (time);
 }
 
+/* se puede abreviar */
 void    print_action(t_philo *phil, int action)
 {
+	long int	time;
+
+	time = get_time();
 	pthread_mutex_lock(&phil->info->m_print);
     if (action == FORK)
-   		printf("%d has taken a fork\n", phil->id);
+   		printf("%ld %d has taken a fork\n", time, phil->id);
 	else if (action == EAT)
-		printf("%d is eating\n", phil->id);
+		printf("%ld %d is eating\n", time, phil->id);
 	else if (action == SLEEP)
-		printf("%d is sleepin\n", phil->id);
+		printf("%ld %d is sleepin\n", time, phil->id);
 	else if (action == THINK)
-		printf("%d is thinking\n", phil->id);
+		printf("%ld %d is thinking\n", time, phil->id);
 	else if (action == DEAD)
-		printf("%d died\n", phil->id);
+		printf("%ld %d died\n", time, phil->id);
 	pthread_mutex_unlock(&phil->info->m_print);
-}
-
-void ft_putstr(char *str, int fd)
-{
-    write(fd, str, ft_strlen(str));
-}
-
-int ft_strlen(char *str)
-{
-    int i;
-
-    i = 0;
-    while (str[i])
-        i++;
-    return (i);   
 }
 
 void	handle_error(int error_type)

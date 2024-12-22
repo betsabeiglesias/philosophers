@@ -6,7 +6,7 @@
 /*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:22:55 by beiglesi          #+#    #+#             */
-/*   Updated: 2024/12/21 23:45:12 by binary           ###   ########.fr       */
+/*   Updated: 2024/12/22 23:17:25 by binary           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@
 
 # define ERROR		-1
 
+
 typedef struct s_philo	t_philo;
+typedef enum e_state	t_state;
+
 
 typedef struct s_data
 {
@@ -57,20 +60,17 @@ typedef struct s_data
 	t_philo			*phil;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	m_dead;
-	pthread_mutex_t	m_meals;
+	pthread_mutex_t	m_meals; //mutex para last_meal que proteger al hilo monitor y los hilos filósofos
 	pthread_mutex_t	m_print;
-
-
-
 }			t_data;	
 
 typedef struct s_philo
 {
 	int				id;
-	int				meals_eaten;
+	int				meals_toeat;
 	bool			alive;
 	long int		last_meal;
-	t_state			state;
+	//t_state			state;
 	pthread_t		philo;
 	pthread_mutex_t *r_fork;
 	pthread_mutex_t *l_fork;
@@ -91,22 +91,29 @@ typedef enum e_state
 
 /* MAIN */
 int			get_args(int argc, char **argv, t_data *info);
-int			init_philo(t_data *info);
+void		init_philo(t_data *info);
+int			init_threads(t_data *info);
 int			init_mutex(t_data *info);
-int			init_threads(t_philo *phil, t_data *info);
 
 /* DINNER */
-void	routine(void *arg);
+void	*routine(void *arg);
 void	dinner_start (t_philo *phil);
-void	philo_life(t_philo *phil);
-void    print_action(t_philo *phil, int action);
+int		philo_life(t_philo *phil);
+int		sleeping(t_philo *phil);
+int		thinking(t_philo *phil);
+int	check_someonedead(t_philo *phil);
+int	check_all_full(t_philo *phil);
 
 
+/* MONITOR */
+void	*monitor(void *arg);
+int		finish_threads(t_data *info);
 
 /* AUXILIAR */
+long int    get_time(void);
+void    print_action(t_philo *phil, int action);
 void		handle_error(int error_type);
-void ft_putstr(char *str, int fd);
-int ft_strlen(char *str);
+
 
 long int	get_time(void);
 
