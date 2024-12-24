@@ -6,7 +6,7 @@
 /*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:22:55 by beiglesi          #+#    #+#             */
-/*   Updated: 2024/12/22 23:17:25 by binary           ###   ########.fr       */
+/*   Updated: 2024/12/24 18:56:52 by binary           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,15 @@
 typedef struct s_philo	t_philo;
 typedef enum e_state	t_state;
 
+typedef enum e_state
+{
+	FORK,
+	EAT,
+	SLEEP,
+	THINK,
+	DEAD,
+	BIRTH
+}			t_state;
 
 typedef struct s_data
 {
@@ -62,30 +71,23 @@ typedef struct s_data
 	pthread_mutex_t	m_dead;
 	pthread_mutex_t	m_meals; //mutex para last_meal que proteger al hilo monitor y los hilos filósofos
 	pthread_mutex_t	m_print;
+	pthread_mutex_t	m_state;
 }			t_data;	
 
 typedef struct s_philo
 {
 	int				id;
-	int				meals_toeat;
+	int				meals_eaten;
 	bool			alive;
 	long int		last_meal;
-	//t_state			state;
+	t_state			state;
 	pthread_t		philo;
 	pthread_mutex_t *r_fork;
 	pthread_mutex_t *l_fork;
 	t_data			*info;
 }				t_philo;
 
-typedef enum e_state
-{
-	FORK,
-	EAT,
-	SLEEP,
-	THINK,
-	DEAD,
-	BIRTH
-}			t_state;
+
 
 
 

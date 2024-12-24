@@ -6,7 +6,7 @@
 /*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:13:31 by binary            #+#    #+#             */
-/*   Updated: 2024/12/22 22:44:27 by binary           ###   ########.fr       */
+/*   Updated: 2024/12/24 16:28:24 by binary           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,19 @@ void    print_action(t_philo *phil, int action)
 {
 	long int	time;
 
-	time = get_time();
-	pthread_mutex_lock(&phil->info->m_print);
-    if (action == FORK)
+	// printf("ENTRA EN PRINT ACTION\n");
+	time = get_time() - phil->info->time_start;
+	if(pthread_mutex_lock(&phil->info->m_print))
+	{
+        printf("ERROR: No se pudo bloquear el mutex de impresión\n");
+        return;
+    }
+    else if (action == FORK)
    		printf("%ld %d has taken a fork\n", time, phil->id);
 	else if (action == EAT)
 		printf("%ld %d is eating\n", time, phil->id);
 	else if (action == SLEEP)
-		printf("%ld %d is sleepin\n", time, phil->id);
+		printf("%ld %d is sleeping\n", time, phil->id);
 	else if (action == THINK)
 		printf("%ld %d is thinking\n", time, phil->id);
 	else if (action == DEAD)

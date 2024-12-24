@@ -9,7 +9,7 @@ OBJ_DIR = ./obj
 
 CC = cc
 NO_LINK = -c
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 INC = -I./philosophers.h
 LDFLAGS = -lpthread
 
