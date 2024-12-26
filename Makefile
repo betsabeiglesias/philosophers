@@ -13,7 +13,7 @@ LDFLAGS = -lpthread
 SRC = main.c \
 		checkings.c \
 		aux.c \
-		dinner.c monitor.c
+		dinner.c monitor.c actions.c mutex.c
 
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 

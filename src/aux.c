@@ -6,40 +6,39 @@
 /*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:13:31 by binary            #+#    #+#             */
-/*   Updated: 2024/12/25 20:32:30 by binary           ###   ########.fr       */
+/*   Updated: 2024/12/26 19:07:29 by binary           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
 
-long int    get_time(void)
+long int	get_time(void)
 {
-    struct timeval  t;
-    long int        time;
+	struct timeval	t;
+	long int		time;
 
-    if (gettimeofday(&t, NULL) == ERROR)
-    {
-        handle_error(ERR_TIME);
-        return (EXIT_FAILURE);
-    }
-    time = (t.tv_sec * 1000) + (t.tv_usec / 1000);
-    return (time);
+	if (gettimeofday(&t, NULL) == ERROR)
+	{
+		handle_error(ERR_TIME);
+		return (EXIT_FAILURE);
+	}
+	time = (t.tv_sec * 1000) + (t.tv_usec / 1000);
+	return (time);
 }
 
 /* se puede abreviar */
-void    print_action(t_philo *phil, int action)
+void	print_action(t_philo *phil, int action)
 {
 	long int	time;
 
-	// printf("ENTRA EN PRINT ACTION\n");
 	time = get_time() - phil->info->time_start;
-	if(pthread_mutex_lock(&phil->info->m_print))
+	if (pthread_mutex_lock(&phil->info->m_print))
 	{
-        printf("ERROR: No se pudo bloquear el mutex de impresión\n");
-        return ;
-    }
-    else if (action == FORK)
-   		printf("%ld %d has taken a fork\n", time, phil->id);
+		printf("ERROR: No se pudo bloquear el mutex de impresión\n");
+		return ;
+	}
+	else if (action == FORK)
+		printf("%ld %d has taken a fork\n", time, phil->id);
 	else if (action == EAT)
 		printf("%ld %d is eating\n", time, phil->id);
 	else if (action == SLEEP)
@@ -63,11 +62,10 @@ void	handle_error(int error_type)
 		printf(ERR_MSG_TIME);
 }
 
-void frees(t_data *info)
+void	frees(t_data *info)
 {
 	ft_free_void((void *)info->phil);
 	ft_free_void((void *)info->forks);
-
 }
 
 void	ft_free_void(void *arg)
