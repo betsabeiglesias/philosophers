@@ -1,26 +1,28 @@
 NAME = philo
 
-SRCS = main.c \
-		checkings.c \
-		aux.c \
-		dinner.c monitor.c
-
+SRC_DIR = ./src
 OBJ_DIR = ./obj
+INC = ./inc
 
 CC = cc
 NO_LINK = -c
 CFLAGS = -Wall -Werror -Wextra -g
-INC = -I./philosophers.h
+
 LDFLAGS = -lpthread
 
-OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
+SRC = main.c \
+		checkings.c \
+		aux.c \
+		dinner.c monitor.c
+
+OBJS = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
 all: $(OBJ_DIR) $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) -o $(NAME)
 
-$(OBJ_DIR)/%.o: %.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(NO_LINK) $(CFLAGS) -I$(INC) $< -o $@
 
 $(OBJ_DIR):
