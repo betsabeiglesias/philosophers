@@ -60,6 +60,24 @@ El programa debe modelar este sistema respetando las restricciones temporales, e
 
 Este proyecto constituye una introducción práctica a los conceptos de concurrencia y sincronización en programación. A través de su desarrollo, se adquieren competencias clave para diseñar sistemas seguros, eficientes y libres de errores en entornos multi-hilo.
 
+## Compilación
+
+Para compilar el programa, asegúrate de estar en el directorio raíz del proyecto y utiliza el comando `make`. El proyecto incluye un `Makefile` que gestiona automáticamente la compilación de los archivos fuente.
+
+```bash
+make
+
+### Ejecución del Programa
+El ejecutable philo requiere los siguientes argumentos para su funcionamiento:
+
+```bash
+./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]
+
+
+
+
+
+
 ### Fuentes de Consulta
 
 Para obtener una mejor comprensión de los conceptos tratados en este proyecto, puedes consultar la siguiente lista de reproducción:
