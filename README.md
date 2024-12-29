@@ -66,16 +66,43 @@ Para compilar el programa, asegúrate de estar en el directorio raíz del proyec
 
 ```bash
 make
+```
 
-### Ejecución del Programa
+## Ejecución del Programa
 El ejecutable philo requiere los siguientes argumentos para su funcionamiento:
 
 ```bash
 ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]
+```
+### Descripción de los Argumentos:
 
+1. **`number_of_philosophers`**:
+   - Número total de filósofos y, por ende, de tenedores.
+   - Debe ser un número entero mayor o igual a 1.
 
+2. **`time_to_die`** (en milisegundos):
+   - Tiempo máximo que un filósofo puede permanecer sin comer desde el inicio de la simulación o desde su última comida antes de morir.
 
+3. **`time_to_eat`** (en milisegundos):
+   - Tiempo que toma a un filósofo comer. Durante este tiempo, los tenedores estarán bloqueados.
 
+4. **`time_to_sleep`** (en milisegundos):
+   - Tiempo que un filósofo pasa durmiendo después de comer.
+
+5. **`number_of_times_each_philosopher_must_eat`** (opcional):
+   - Número de veces que cada filósofo debe comer antes de que la simulación termine. Si no se proporciona, la simulación solo termina cuando un filósofo muere.
+
+## Descripción de los Argumentos:
+
+```bash
+./philo 5 800 200 200
+```
+### En este caso:
+
+- Hay 5 filósofos.
+- Cada filósofo debe comer antes de 800 ms para evitar morir.
+- Cada comida toma 200 ms.
+- Después de comer, cada filósofo duerme durante 200 ms.
 
 
 ### Fuentes de Consulta
