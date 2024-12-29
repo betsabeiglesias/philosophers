@@ -6,7 +6,7 @@
 /*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:13:31 by binary            #+#    #+#             */
-/*   Updated: 2024/12/26 19:07:29 by binary           ###   ########.fr       */
+/*   Updated: 2024/12/29 19:54:15 by binary           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,13 @@ long int	get_time(void)
 	return (time);
 }
 
-/* se puede abreviar */
-void	print_action(t_philo *phil, int action)
+void	print_action(t_philo *phil, char *action)
 {
 	long int	time;
 
 	time = get_time() - phil->info->time_start;
-	if (pthread_mutex_lock(&phil->info->m_print))
-	{
-		printf("ERROR: No se pudo bloquear el mutex de impresión\n");
-		return ;
-	}
-	else if (action == FORK)
-		printf("%ld %d has taken a fork\n", time, phil->id);
-	else if (action == EAT)
-		printf("%ld %d is eating\n", time, phil->id);
-	else if (action == SLEEP)
-		printf("%ld %d is sleeping\n", time, phil->id);
-	else if (action == THINK)
-		printf("%ld %d is thinking\n", time, phil->id);
-	else if (action == DEAD)
-		printf("%ld %d died\n", time, phil->id);
+	pthread_mutex_lock(&phil->info->m_print);
+	printf("%ld %d %s\n", time, phil->id, action);
 	pthread_mutex_unlock(&phil->info->m_print);
 }
 
@@ -60,6 +46,14 @@ void	handle_error(int error_type)
 		printf(ERR_MSG_MAX);
 	if (error_type == ERR_TIME)
 		printf(ERR_MSG_TIME);
+	if (error_type == ERR_MALL)
+		printf(ERR_MSG_MALL);
+	if (error_type == ERR_THR)
+		printf(ERR_MSG_THR);
+	if (error_type == ERR_PHILO)
+		printf(ERR_MSG_PHILO);
+	if (error_type == ERR_MUT)
+		printf(ERR_MSG_MUT);
 }
 
 void	frees(t_data *info)

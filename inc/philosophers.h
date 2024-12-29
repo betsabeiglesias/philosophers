@@ -6,7 +6,7 @@
 /*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:22:55 by beiglesi          #+#    #+#             */
-/*   Updated: 2024/12/26 19:11:54 by binary           ###   ########.fr       */
+/*   Updated: 2024/12/29 19:50:11 by binary           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,20 @@
 
 # define ERROR		-1
 
+# define FORK		"has taken a fork"
+# define EAT		"is eating"
+# define SLEEP		"is sleeping"
+# define THINK		"is thinking"
+# define DEAD		"died"
+
 typedef struct s_philo	t_philo;
 typedef enum e_state	t_state;
 
 typedef enum e_state
 {
-	FORK,
-	EAT,
-	SLEEP,
-	THINK,
-	DEAD,
+	EATSTATE,
+	THINKSTATE,
+	SLEEPSTATE,
 	BIRTH
 }			t_state;
 
@@ -116,7 +120,7 @@ int			join_threads(t_data *info);
 
 /* AUXILIAR */
 long int	get_time(void);
-void		print_action(t_philo *phil, int action);
+void		print_action(t_philo *phil, char *action);
 void		handle_error(int error_type);
 void		frees(t_data *info);
 void		ft_free_void(void *arg);

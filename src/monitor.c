@@ -6,7 +6,7 @@
 /*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 11:26:11 by binary            #+#    #+#             */
-/*   Updated: 2024/12/26 19:02:49 by binary           ###   ########.fr       */
+/*   Updated: 2024/12/29 19:47:32 by binary           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	is_hungry(t_data *info)
 		pthread_mutex_lock(&info->m_meals);
 		time = get_time() - info->phil[i].last_meal;
 		pthread_mutex_unlock(&info->m_meals);
-		if (time > info->to_die && info->phil->state != EAT)
+		if (time > info->to_die && info->phil->state != EATSTATE)
 		{
 			print_action(info->phil, DEAD);
 			return (EXIT_FAILURE);
