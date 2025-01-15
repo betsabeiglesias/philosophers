@@ -6,7 +6,7 @@
 /*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 16:17:25 by binary            #+#    #+#             */
-/*   Updated: 2024/12/29 19:50:13 by binary           ###   ########.fr       */
+/*   Updated: 2025/01/15 13:46:38 by binary           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ int	count_meals_eaten(t_philo *phil)
 
 	i = 0;
 	full = 0;
+	pthread_mutex_lock(&phil->info->m_meals);
 	while (i < phil->info->nb_philo)
 	{
-		pthread_mutex_lock(&phil->info->m_meals);
 		if (phil->info->must_meals != -1 && \
 			phil->info->phil[i].meals_eaten == phil->info->must_meals)
 		{
@@ -82,8 +82,9 @@ int	count_meals_eaten(t_philo *phil)
 				return (EXIT_FAILURE);
 			}
 		}
-		pthread_mutex_unlock(&phil->info->m_meals);
+		
 		i++;
 	}
+	pthread_mutex_unlock(&phil->info->m_meals);
 	return (EXIT_SUCCESS);
 }

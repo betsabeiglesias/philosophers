@@ -6,7 +6,7 @@
 /*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 16:14:53 by binary            #+#    #+#             */
-/*   Updated: 2024/12/26 19:03:48 by binary           ###   ########.fr       */
+/*   Updated: 2025/01/15 13:13:03 by binary           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,23 +75,44 @@ void	unlock_forks(t_philo *phil)
 	pthread_mutex_unlock(phil->l_fork);
 }
 
+// void	lock_forks(t_philo *phil)
+// {
+// 	if (check_someonedead(phil->info))
+// 		return ;
+// 	pthread_mutex_lock(phil->r_fork);
+// 	if (check_someonedead(phil->info))
+// 	{
+// 		pthread_mutex_unlock(phil->r_fork);
+// 		return ;
+// 	}
+// 	print_action(phil, FORK);
+// 	pthread_mutex_lock(phil->l_fork);
+// 	if (check_someonedead(phil->info))
+// 	{
+// 		pthread_mutex_unlock(phil->l_fork);
+// 		pthread_mutex_unlock(phil->r_fork);
+// 		return ;
+// 	}
+// 	print_action(phil, FORK);
+// }
 void	lock_forks(t_philo *phil)
 {
 	if (check_someonedead(phil->info))
 		return ;
-	pthread_mutex_lock(phil->r_fork);
-	if (check_someonedead(phil->info))
+	
+	// Ordenar adquisición de tenedores basado en el ID del filósofo
+	if (phil->id % 2 == 0)
 	{
-		pthread_mutex_unlock(phil->r_fork);
-		return ;
+		pthread_mutex_lock(phil->l_fork);
+		print_action(phil, FORK);
+		pthread_mutex_lock(phil->r_fork);
+		print_action(phil, FORK);
 	}
-	print_action(phil, FORK);
-	pthread_mutex_lock(phil->l_fork);
-	if (check_someonedead(phil->info))
+	else
 	{
-		pthread_mutex_unlock(phil->l_fork);
-		pthread_mutex_unlock(phil->r_fork);
-		return ;
+		pthread_mutex_lock(phil->r_fork);
+		print_action(phil, FORK);
+		pthread_mutex_lock(phil->l_fork);
+		print_action(phil, FORK);
 	}
-	print_action(phil, FORK);
 }
