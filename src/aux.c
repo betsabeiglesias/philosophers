@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aux.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beiglesi <beiglesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:13:31 by binary            #+#    #+#             */
-/*   Updated: 2024/12/29 19:54:15 by binary           ###   ########.fr       */
+/*   Updated: 2025/01/17 11:24:37 by beiglesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	print_action(t_philo *phil, char *action)
 	long int	time;
 
 	time = get_time() - phil->info->time_start;
+	if (check_someonedead(phil->info) || check_allfull(phil->info))
+		return ;
 	pthread_mutex_lock(&phil->info->m_print);
 	printf("%ld %d %s\n", time, phil->id, action);
 	pthread_mutex_unlock(&phil->info->m_print);
