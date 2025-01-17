@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checkings.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beiglesi <beiglesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:01:50 by beiglesi          #+#    #+#             */
-/*   Updated: 2024/12/26 18:59:14 by binary           ###   ########.fr       */
+/*   Updated: 2025/01/17 11:25:17 by beiglesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	check_int(int argc, char **argv)
 	while (i < argc)
 	{
 		nb = ft_atoi_philo(argv[i]);
-		if (nb < 0)
+		if (nb <= 0)
 			return (handle_error(ERR_NEG), EXIT_FAILURE);
 		if (nb > INT_MAX)
 			return (handle_error(ERR_MAX), EXIT_FAILURE);
