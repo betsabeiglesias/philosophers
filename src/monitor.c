@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beiglesi <beiglesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 11:26:11 by binary            #+#    #+#             */
-/*   Updated: 2025/01/15 13:19:37 by binary           ###   ########.fr       */
+/*   Updated: 2025/01/17 11:27:32 by beiglesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	is_hungry(t_data *info)
 		time = get_time() - info->phil[i].last_meal;
 		pthread_mutex_unlock(&info->m_meals);
 		pthread_mutex_lock(&info->m_state);
-		if (time > info->to_die && info->phil->state != EATSTATE)
+		if (time > info->to_die && info->phil[i].state != EATSTATE)
 		{
 			pthread_mutex_unlock(&info->m_state);
 			print_action(info->phil, DEAD);
