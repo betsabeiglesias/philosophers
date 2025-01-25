@@ -6,7 +6,7 @@
 /*   By: beiglesi <beiglesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 16:14:53 by binary            #+#    #+#             */
-/*   Updated: 2025/01/25 11:31:53 by beiglesi         ###   ########.fr       */
+/*   Updated: 2025/01/25 13:11:15 by beiglesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,23 +94,34 @@ void	unlock_forks(t_philo *phil)
 // 		return ;
 // 	}
 // 	print_action(phil, FORK);
+// 	//usleep(100);
 // }
+
+
 void	lock_forks(t_philo *phil)
 {
-	if (check_someonedead(phil->info))
-		return ;
-	if (phil->id % 2 == 0)
-	{
-		pthread_mutex_lock(phil->l_fork);
-		print_action(phil, FORK);
-		pthread_mutex_lock(phil->r_fork);
-		print_action(phil, FORK);
-	}
-	else
-	{
-		pthread_mutex_lock(phil->r_fork);
-		print_action(phil, FORK);
-		pthread_mutex_lock(phil->l_fork);
-		print_action(phil, FORK);
-	}
+// 	if (check_someonedead(phil->info))
+// 		return ;
+	
+// 	// if (phil->id % 2 == 0)
+// 	// {
+// 	// 	pthread_mutex_lock(phil->l_fork);
+// 	// 	print_action(phil, FORK);
+// 	// 	pthread_mutex_lock(phil->r_fork);
+// 	// 	print_action(phil, FORK);
+// 	// }
+// 	// else
+// 	// {
+// 	// 	pthread_mutex_lock(phil->r_fork);
+// 	// 	print_action(phil, FORK);
+// 	// 	pthread_mutex_lock(phil->l_fork);
+// 	// 	print_action(phil, FORK);
+// 	// }
+	
+	pthread_mutex_lock(phil->l_fork);
+	print_action(phil, FORK);
+	pthread_mutex_lock(phil->r_fork);
+	print_action(phil, FORK);
 }
+
+

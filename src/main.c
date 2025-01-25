@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beiglesi <beiglesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:21:07 by beiglesi          #+#    #+#             */
-/*   Updated: 2024/12/26 19:18:28 by binary           ###   ########.fr       */
+/*   Updated: 2025/01/25 12:48:33 by beiglesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ void	init_philo(t_data *info)
 		info->phil[i].r_fork = &info->forks[i];
 		if (info->nb_philo > 1)
 		{
-			info->phil[i].l_fork = &info->forks[(i + 1) % info->nb_philo];
+			if(i == info->nb_philo - 1)
+				info->phil[i].l_fork = &info->forks[0];
+			else
+				info->phil[i].l_fork = &info->forks[(i + 1) % info->nb_philo];
 		}
 		i++;
 	}
