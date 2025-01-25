@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mutex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beiglesi <beiglesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 16:14:53 by binary            #+#    #+#             */
-/*   Updated: 2025/01/15 13:13:03 by binary           ###   ########.fr       */
+/*   Updated: 2025/01/25 11:31:53 by beiglesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,6 @@ void	lock_forks(t_philo *phil)
 {
 	if (check_someonedead(phil->info))
 		return ;
-	
-	// Ordenar adquisición de tenedores basado en el ID del filósofo
 	if (phil->id % 2 == 0)
 	{
 		pthread_mutex_lock(phil->l_fork);
