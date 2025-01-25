@@ -6,7 +6,7 @@
 /*   By: beiglesi <beiglesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:21:07 by beiglesi          #+#    #+#             */
-/*   Updated: 2025/01/25 12:48:33 by beiglesi         ###   ########.fr       */
+/*   Updated: 2025/01/25 13:17:39 by beiglesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,11 @@ void	init_philo(t_data *info)
 		info->phil[i].id = i + 1;
 		info->phil[i].meals_eaten = 0;
 		info->phil[i].last_meal = get_time();
-		info->phil[i].state = BIRTH;
 		info->phil[i].info = info;
 		info->phil[i].r_fork = &info->forks[i];
 		if (info->nb_philo > 1)
 		{
-			if(i == info->nb_philo - 1)
+			if (i == info->nb_philo - 1)
 				info->phil[i].l_fork = &info->forks[0];
 			else
 				info->phil[i].l_fork = &info->forks[(i + 1) % info->nb_philo];

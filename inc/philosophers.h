@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beiglesi <beiglesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:22:55 by beiglesi          #+#    #+#             */
-/*   Updated: 2024/12/29 19:50:11 by binary           ###   ########.fr       */
+/*   Updated: 2025/01/25 13:19:58 by beiglesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,6 @@
 # define DEAD		"died"
 
 typedef struct s_philo	t_philo;
-typedef enum e_state	t_state;
-
-typedef enum e_state
-{
-	EATSTATE,
-	THINKSTATE,
-	SLEEPSTATE,
-	BIRTH
-}			t_state;
 
 typedef struct s_data
 {
@@ -81,7 +72,6 @@ typedef struct s_philo
 	int				id;
 	int				meals_eaten;
 	long int		last_meal;
-	t_state			state;
 	pthread_t		philo;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;

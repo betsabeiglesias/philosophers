@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beiglesi <beiglesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 16:17:25 by binary            #+#    #+#             */
-/*   Updated: 2025/01/15 13:46:38 by binary           ###   ########.fr       */
+/*   Updated: 2025/01/25 13:16:10 by beiglesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ int	eating(t_philo *phil)
 		return (EXIT_FAILURE);
 	}
 	print_action(phil, EAT);
-	pthread_mutex_lock(&phil->info->m_state);
-	phil->state = EATSTATE;
-	pthread_mutex_unlock(&phil->info->m_state);
 	usleep(phil->info->to_eat * 1000);
 	pthread_mutex_lock(&phil->info->m_meals);
 	phil->last_meal = get_time();
@@ -44,9 +41,6 @@ int	sleeping(t_philo *phil)
 		return (EXIT_FAILURE);
 	print_action(phil, SLEEP);
 	usleep(phil->info->to_sleep * 1000);
-	pthread_mutex_lock(&phil->info->m_state);
-	phil->state = SLEEPSTATE;
-	pthread_mutex_unlock(&phil->info->m_state);
 	return (EXIT_SUCCESS);
 }
 
@@ -55,9 +49,6 @@ int	thinking(t_philo *phil)
 	if (check_someonedead(phil->info) || check_allfull(phil->info))
 		return (EXIT_FAILURE);
 	print_action(phil, THINK);
-	pthread_mutex_lock(&phil->info->m_state);
-	phil->state = THINKSTATE;
-	pthread_mutex_unlock(&phil->info->m_state);
 	return (EXIT_SUCCESS);
 }
 
@@ -82,7 +73,6 @@ int	count_meals_eaten(t_philo *phil)
 				return (EXIT_FAILURE);
 			}
 		}
-		
 		i++;
 	}
 	pthread_mutex_unlock(&phil->info->m_meals);

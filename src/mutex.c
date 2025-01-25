@@ -6,7 +6,7 @@
 /*   By: beiglesi <beiglesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 16:14:53 by binary            #+#    #+#             */
-/*   Updated: 2025/01/25 13:11:15 by beiglesi         ###   ########.fr       */
+/*   Updated: 2025/01/25 13:18:39 by beiglesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,7 @@ int	destroy_mutex(t_data *info)
 	while (i < info->nb_philo)
 	{
 		if (pthread_mutex_destroy(&info->forks[i]))
-		{
-			handle_error(ERR_MUT);
-			return (EXIT_FAILURE);
-		}
+			return (handle_error(ERR_MUT), EXIT_FAILURE);
 		i++;
 	}
 	if (pthread_mutex_destroy(&info->m_dead))
@@ -75,53 +72,12 @@ void	unlock_forks(t_philo *phil)
 	pthread_mutex_unlock(phil->l_fork);
 }
 
-// void	lock_forks(t_philo *phil)
-// {
-// 	if (check_someonedead(phil->info))
-// 		return ;
-// 	pthread_mutex_lock(phil->r_fork);
-// 	if (check_someonedead(phil->info))
-// 	{
-// 		pthread_mutex_unlock(phil->r_fork);
-// 		return ;
-// 	}
-// 	print_action(phil, FORK);
-// 	pthread_mutex_lock(phil->l_fork);
-// 	if (check_someonedead(phil->info))
-// 	{
-// 		pthread_mutex_unlock(phil->l_fork);
-// 		pthread_mutex_unlock(phil->r_fork);
-// 		return ;
-// 	}
-// 	print_action(phil, FORK);
-// 	//usleep(100);
-// }
-
-
 void	lock_forks(t_philo *phil)
 {
-// 	if (check_someonedead(phil->info))
-// 		return ;
-	
-// 	// if (phil->id % 2 == 0)
-// 	// {
-// 	// 	pthread_mutex_lock(phil->l_fork);
-// 	// 	print_action(phil, FORK);
-// 	// 	pthread_mutex_lock(phil->r_fork);
-// 	// 	print_action(phil, FORK);
-// 	// }
-// 	// else
-// 	// {
-// 	// 	pthread_mutex_lock(phil->r_fork);
-// 	// 	print_action(phil, FORK);
-// 	// 	pthread_mutex_lock(phil->l_fork);
-// 	// 	print_action(phil, FORK);
-// 	// }
-	
+	if (check_someonedead(phil->info))
+		return ;
 	pthread_mutex_lock(phil->l_fork);
 	print_action(phil, FORK);
 	pthread_mutex_lock(phil->r_fork);
 	print_action(phil, FORK);
 }
-
-

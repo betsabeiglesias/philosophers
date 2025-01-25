@@ -6,7 +6,7 @@
 /*   By: beiglesi <beiglesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:17:03 by beiglesi          #+#    #+#             */
-/*   Updated: 2025/01/25 12:38:16 by beiglesi         ###   ########.fr       */
+/*   Updated: 2025/01/25 13:16:23 by beiglesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	philo_life(t_philo *phil)
 		if (one_philo(phil))
 			return (EXIT_FAILURE);
 	if (phil->id % 2 != 0)
-		//usleep(100);
 		usleep(phil->info->to_eat * 1000 / 2);
 	if (philo_dinner(phil))
 		return (EXIT_FAILURE);
