@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beiglesi <beiglesi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:22:55 by beiglesi          #+#    #+#             */
-/*   Updated: 2025/01/25 13:19:58 by beiglesi         ###   ########.fr       */
+/*   Updated: 2025/01/29 09:43:02 by binary           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void		ft_free_void(void *arg);
 int			check_arguments(int argc, char **argv);
 int			is_space(char c);
 int			ft_isdigit_philo(char **str);
-int			ft_atoi_philo(char *str);
+long int	ft_atoi_philo(char *str);
 int			check_int(int argc, char **argv);
 
 #endif

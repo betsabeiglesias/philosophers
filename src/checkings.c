@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checkings.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beiglesi <beiglesi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: binary <binary@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:01:50 by beiglesi          #+#    #+#             */
-/*   Updated: 2025/01/17 11:25:17 by beiglesi         ###   ########.fr       */
+/*   Updated: 2025/01/29 09:48:09 by binary           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_arguments(int argc, char **argv)
 	if (ft_isdigit_philo(argv))
 		return (handle_error(ERR_ARGS), EXIT_FAILURE);
 	if (check_int(argc, argv))
-		return (handle_error(ERR_ARGS), EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
@@ -54,7 +54,7 @@ int	ft_isdigit_philo(char **str)
 	return (0);
 }
 
-int	ft_atoi_philo(char *str)
+long int	ft_atoi_philo(char *str)
 {
 	int			i;
 	int			sign;
@@ -66,12 +66,14 @@ int	ft_atoi_philo(char *str)
 	while (is_space(str[i]))
 		i++;
 	if (str[i] == '-')
-		sign = -1;
+		return (-1);
 	if (str[i] == '-' || str[i] == '+')
 		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		nb = nb * 10 + (str[i] - '0');
+		if (nb > INT_MAX)
+			return (-2);
 		i++;
 	}
 	return (nb * sign);
@@ -86,10 +88,12 @@ int	check_int(int argc, char **argv)
 	while (i < argc)
 	{
 		nb = ft_atoi_philo(argv[i]);
+		if (nb == -1)
+			return (handle_error(ERR_NEG), EXIT_FAILURE);
+		if (nb == -2)
+			return (handle_error(ERR_MAX), EXIT_FAILURE);
 		if (nb <= 0)
 			return (handle_error(ERR_NEG), EXIT_FAILURE);
-		if (nb > INT_MAX)
-			return (handle_error(ERR_MAX), EXIT_FAILURE);
 		i++;
 	}
 	return (EXIT_SUCCESS);
